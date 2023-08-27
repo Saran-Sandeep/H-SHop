@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}
+    Home
+  {% endblock title %}  
+</head>
+<body>
+  {% block body %}
+    <div class="cont">
+      <div class="img_col">
+          <div class="text_col_1">
+              <h1>H-SHop</h1>
+          </div>
+          <div class="text_col">
+            <h2>Your One-Stop Shop for the Latest Mobile Phones and Accessories</h2>
+          </div>
+          <div class="text_col">
+            <a href="/explore/">
+              <button type="button" class="btn btn-danger">Explore now <i class="fa-solid fa-circle-arrow-right"></i></button>
+            </a>
+          </div>
+      </div>
+      <div class="img_col">
+        
+      </div>
+    </div>
+{% endblock body %}   
+
+{% block cards_body %}
+
+  {% if request.user.is_authenticated %}
+
+    <h3 class="my-3 text-center text-dark bg-light">Welcome to H-SHop</h3>
+    <h5 class="my-3 text-center text-dark">Check our products</h5>
+    {% for product, range, nSlides in allProds %}
+    
+    <h3 class="mt-5 text-center text-danger bg-light">All time Favourite {{product.0.category}}</h3>
+
+    <div class="container">
+      <div class="row mt-3">
+        
+        {% for i in product %}
+
+        <div class="col-md-3 mt-3 mb-3" >
+
+            <img src={{i.image.url}} class="card-img-top" alt="img not found">
+
+            <div class="card-body">
+              <h5 class="card-title mt-2" id="namepr{{i.id}}"> {{i.product_name}} </h5>
+              <p class="card-text mt-2"> {{i.desc|slice:"0:53"}}... </p>
+              <h6 class="card-title">Price : <i class="fa-solid fa-indian-rupee-sign"></i> <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
+            
+              <span>
+                <button data-product="{{i.id}}" data-action="add" type="button" class="btn btn-danger update-cart mt-3">Add To Cart</button>
+              </span>
+            
+              <a href="/">
+                <button type="button" class="btn btn-dark cart mt-3">View</button>
+              </a>
+            
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+
+    {% endfor %}
+
+  {% endif %}
+{% endblock cards_body %}
+</body>
+</html>
+
+
+
+
+

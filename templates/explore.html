@@ -1,0 +1,27 @@
+{% extends "base_01.html" %}
+{% load static %}
+{% block title %}Explore Page{% endblock title %}
+
+{% block body %}
+    <div class="container pt-2">
+        <h2 style="text-align: center;" class="m-4">Explore our amazing products here in this Page</h2>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-3 mt-3 mb-3">
+                    <img  class="card-img-top" src="{{product.imageURL}}" alt="img...">
+                    <div class="box-element product">
+                        <h6><strong>{{product.product_name}}</strong></h6>
+                        <hr>
+                        <h6 class="card-text"> {{product.desc|slice:"0:39"}}... </h6>
+                        <hr>
+
+                        <h4><strong><i class="fa-solid fa-indian-rupee-sign"></i> {{product.price}}</strong></h4>
+                        <a class="btn btn-outline-success" href="#">View</a>
+                        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

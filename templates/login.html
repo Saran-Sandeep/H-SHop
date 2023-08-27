@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Login Page{% endblock title %}
+
+{% block body %}
+<div class="card bg-light p-5">
+    <form method="post" action="/login/">  
+        {% csrf_token %}
+        <div style="text-align:center">
+            <h2 class="text-dark mb-4">Login</h2>
+        </div>
+        <p class="text-danger">
+            {% if mailsent %}  <h5 class="text-dark mb-4">Check ur mail for account activation</h5>
+            {% elif invalid_cred %}  <h5 class="text-dark mb-4">Password incorrect</h5>
+            {% endif %}
+        </p>
+        <div class="mb-3">
+            <label for="Inputusername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="Inputusername" name="Inputusername" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+            <label for="pass1" class="form-label">Enter-Password</label>
+            <input type="password" class="form-control" id="pass1" name="pass1">
+        </div>
+        <div class=" d-grid col-5 mb-3 mx-auto">
+            <button type="submit" class="btn btn-danger primary">Log In</button>
+        </div>
+        New User ? <a href="/signup/">Create account</a>
+  </form>
+</div>
+{% endblock body %}

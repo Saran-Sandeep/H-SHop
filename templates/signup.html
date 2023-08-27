@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up Page
+{% endblock title %}
+
+{% block body %}
+
+<div class="card gap-2 bg-light p-4 mt-5">
+    <form method="post" action="/signup/">  {% csrf_token %}
+        <div style="text-align:center">
+            <h2 class="text-dark mb-4">Sign Up</h2>
+            {% if passmm %}
+                <h5 class="text-dark mb-4">***Passwords missmatch***</h5>
+            {% elif alreadyexists%}
+                <h6 class="text-dark mb-4">***Email already in use***</h6>
+            {% endif %}
+        </div>
+        <p class="text-danger">{% if flag %}Passwords do not match{% endif %}</p>
+        <div class="mb-1">
+            <label for="uname" class="form-label">Enter Username</label>
+            <input type="text" class="form-control" id="uname" name="username">
+        </div>
+        <div class="mb-1">
+            <label for="InputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="InputEmail1" name="InputEmail1" aria-describedby="emailHelp" required>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-1">
+            <label for="InputPassword1" class="form-label">Enter-Password</label>
+            <input type="password" class="form-control" id="InputPassword1" name="InputPassword1">
+        </div>
+        <div class="mb-1">
+            <label for="InputPassword2" class="form-label">Confirm-Password</label>
+            <input type="password" class="form-control" id="InputPassword2" name="InputPassword2">
+        </div>
+        <div class=" d-grid col-4 mb-3 mx-auto">
+        <button type="submit" class="btn btn-danger primary">Sign Up</button>
+        </div>
+        <div style="text-align:center">
+        Already User  <a href="/login/">Log In?</a>
+        </div>
+  </form>
+</div>
+{% endblock body %}
+
